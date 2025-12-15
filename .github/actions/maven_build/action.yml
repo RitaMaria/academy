@@ -1,8 +1,7 @@
-name: Custom-action
-description: echo test
+name: Build maven
+description: build maven
 runs:
   using: composite
   steps:
-    - run: |
-        echo "Hello test"
+    - run: mvn -B package --file pom.xml
       shell: bash
