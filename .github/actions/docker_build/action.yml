@@ -1,15 +1,34 @@
 name: Docker build
-description: Replace-With-Your-Action-Description
+description: Build a Docker image with configurable Dockerfile, image name, and tag
+
 inputs:
-  replace_with_your_input_name:
-    description: "Replace-With-Your-Input-Description"
+  path_dockerfile:
+    description: Path to the Dockerfile
     required: false
-    default: "Replace-With-Your-Input-Default-Value"
+    default: Dockerfile
+
+  image_name:
+    description: Name of the Docker image to build
+    required: true
+
+  tag_name:
+    description: Tag for the Docker image
+    required: false
+
 runs:
   using: composite
   steps:
-    - run: |
-        docker build . \
-        --file Dockerfile \
-        --tag academy:$(date +%s)
+    - name: Build Docker image
       shell: bash
+      run: |
+        # Decide which tag to use
+        if [ -z "${{ inputs.tag_name }}" ]; then
+          export TAG=$(date +%s)
+        else
+          export TAG="${{ inputs.tag_name }}"
+        fi
+
+        # Build Docker image using inputs
+        docker build . \
+          --file "${{ inputs.path_dockerfile }}" \
+          --tag "${{ inputs.image_name }}:${TAG}"
