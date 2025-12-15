@@ -40,3 +40,6 @@ jobs:
       run: |
         echo "Docker images available on the runner:"
         docker image ls
+
+    - name: Run my custom action
+      uses: ./.github/actions/maven_build
