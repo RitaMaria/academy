@@ -50,4 +50,5 @@ jobs:
     - name: Push Docker image
       uses: ./.github/actions/docker_push
       with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
         image_reference: 'academy:test'
