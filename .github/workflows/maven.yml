@@ -34,7 +34,7 @@ jobs:
       uses: ./.github/actions/docker_build
       with:
         tag_name: test
-        image_name: ''
+        image_name: 'academy'
 
     - name: List Docker images
       run: |
