@@ -31,9 +31,10 @@ jobs:
       uses: ./.github/actions/maven_build
 
     - name: Build Docker image using custom action
-      uses: ./.github/actions/docker-build
+      uses: ./.github/actions/docker_build
       with:
         tag_name: test
+        image_name: ''
 
     - name: List Docker images
       run: |
