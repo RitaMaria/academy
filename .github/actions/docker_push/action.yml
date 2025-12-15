@@ -1,0 +1,20 @@
+name: Docker Push
+description: Tag and push a Docker image to Docker Hub
+
+inputs:
+  image_reference:
+    description: Docker image reference generated previously (including tag)
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Tag Docker image for Docker Hub
+      shell: bash
+      run: |
+        docker tag "${{ inputs.image_reference }}" "${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.image_reference }}"
+
+    - name: Push Docker image to Docker Hub
+      shell: bash
+      run: |
+        docker push "${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.image_reference }}"
