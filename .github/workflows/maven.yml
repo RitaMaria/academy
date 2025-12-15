@@ -35,3 +35,8 @@ jobs:
         docker build . \
           --file Dockerfile \
           --tag academy:$(date +%s)
+
+    - name: List Docker images
+      run: |
+        echo "Docker images available on the runner:"
+        docker image ls
